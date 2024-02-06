@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memcached-deploy
+  labels: 
+    app: app-mc
+spec:
+  selector:
+    matchLabels:
+      app: app-mc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app-mc
+    spec:
+     containers:
+       - name: app-mc
+         image: memcached
+         ports:
+          - name: app-mc-port
+            containerPort: 11211
