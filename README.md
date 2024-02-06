@@ -1,7 +1,7 @@
-# Deploying a Web Application stack to Kubernetes Cluster
+## Deploying a Web Application stack to Kubernetes Cluster
 
 *Step 1: Containerize the Web Application Stack*
-•⁠  ⁠I  containerized the Java stack for the web application.
+•⁠  ⁠I containerized the Java stack for the web application.
 •⁠  ⁠I thoroughly tested the containerized application before deploying it to the Kubernetes cluster.
 
 *Step 2: Create a Kubernetes Cluster*
