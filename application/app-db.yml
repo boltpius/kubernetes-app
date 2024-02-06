@@ -17,8 +17,8 @@ spec:
      containers:
        - name: app-db
          image: boltpius/vprofiledb:latest
-         volueMounts:
-          - mouthPath: /var/lib/mysql
+         volumeMounts:
+          - mountPath: /var/lib/mysql
             name: app-db-volume
          ports:
           - name: app-db-port
@@ -37,10 +37,10 @@ spec:
           volumeID: vol-0b74ab324c1051e07
           fsType: ext4 
 
-    initContainers:
+     initContainers:
       - name: busybox 
         image: busybox:latest
         args: ["rm", "-rf", "/var/lib/mysql/lost+found"]
-        volueMounts:
-          - mouthPath: /var/lib/mysql
+        volumeMounts:
+          - mountPath: /var/lib/mysql
             name: app-db-volume
