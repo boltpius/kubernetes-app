@@ -15,7 +15,7 @@ spec:
         app: vprodb
     spec:
      containers:
-       - name: app-db
+       - name: vprodb
          image: boltpius/vprofiledb:latest
          volumeMounts:
           - mountPath: /var/lib/mysql
