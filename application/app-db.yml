@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vprodb
+  labels: 
+    app: vprodb
+spec:
+  selector:
+    matchLabels:
+      app: vprodb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vprodb
+    spec:
+     containers:
+       - name: app-db
+         image: boltpius/vprofiledb:latest
+         volueMounts:
+          - mouthPath: /var/lib/mysql
+            name: app-db-volume
+         ports:
+          - name: app-db-port
+            containerPort: 3306
+         env:
+          - name: MYSQL_ROOT_PASSWORD 
+            valueFrom:
+             secretKeyRef:
+              name: app-secret
+              key: db-pass
+     nodeSelector:
+      zone: eu-west-1a
+     volumes:
+      - name: app-db-volume
+        awsElasticBlockStore:
+          volumeID: vol-0b74ab324c1051e07
+          fsType: ext4 
+
+    initContainers:
+      - name: busybox 
+        image: busybox:latest
+        args: ["rm", "-rf", "/var/lib/mysql/lost+found"]
+        volueMounts:
+          - mouthPath: /var/lib/mysql
+            name: app-db-volume
